@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/permission_page" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#F7F8F4" android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="64dp"
+        android:paddingStart="8dp" android:paddingEnd="16dp" android:gravity="center_vertical" android:background="#FFFFFF">
+        <ImageButton android:id="@+id/permissions_back" android:layout_width="48dp" android:layout_height="48dp"
+            android:padding="13dp" android:src="@drawable/ic_back" android:tint="#284E44"
+            android:contentDescription="返回聊天" android:background="?android:attr/selectableItemBackgroundBorderless"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp"
+            android:text="权限与后台" android:accessibilityHeading="true" android:textSize="20sp"
+            android:textStyle="bold" android:textColor="#1B302B"/>
+    </LinearLayout>
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E1E6DF"/>
+    <ScrollView android:id="@+id/permissions_scroll" android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="1" android:clipToPadding="false"
+        android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="16dp" android:paddingBottom="8dp">
+        <LinearLayout android:id="@+id/permission_rows" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="vertical"/>
+    </ScrollView>
+</LinearLayout>

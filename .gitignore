@@ -1,0 +1,10 @@
+.gradle/
+**/build/
+local.properties
+google-services.json
+*.apk
+*.bak*
+server/.env
+server/data/
+server/secrets/
+server/persona.md

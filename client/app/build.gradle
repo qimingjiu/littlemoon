@@ -1,0 +1,48 @@
+import groovy.json.JsonSlurper
+
+plugins {
+    id 'com.android.application'
+}
+
+def appId = 'app.littlemoon.assistant'
+def configFile = file('google-services.json')
+
+android {
+    namespace appId
+    compileSdk 35
+
+    defaultConfig {
+        applicationId appId
+        minSdk 26
+        targetSdk 35
+        versionCode 6
+        versionName '0.2.4'
+        if (configFile.exists()) {
+            def config = new JsonSlurper().parse(configFile)
+            def client = config.client.find { it.client_info.android_client_info.package_name == appId }
+            if (!client) throw new GradleException("Firebase config must contain the package ${appId}")
+            def firebaseResources = [
+                google_app_id: client.client_info.mobilesdk_app_id,
+                google_api_key: client.api_key?.find { it.current_key }?.current_key,
+                gcm_defaultSenderId: config.project_info.project_number,
+                project_id: config.project_info.project_id
+            ]
+            firebaseResources.each { key, value ->
+                if (!value) throw new GradleException("Missing Firebase client config field for ${key}")
+                resValue 'string', key, value.toString()
+            }
+        }
+    }
+    buildFeatures { buildConfig true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets.main.java.srcDir 'src/push/java'
+    sourceSets.debug.manifest.srcFile 'src/push/AndroidManifest.xml'
+    sourceSets.release.manifest.srcFile 'src/push/AndroidManifest.xml'
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-messaging:25.1.0'
+}

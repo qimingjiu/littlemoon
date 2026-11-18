@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:name=".PushApplication">
+        <meta-data android:name="firebase_messaging_installation_id_enabled" android:value="true"/>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="assistant_replies"/>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_reply_notice"/>
+        <service android:name=".AssistantMessagingService" android:exported="false">
+            <intent-filter><action android:name="com.google.firebase.MESSAGING_EVENT"/></intent-filter>
+        </service>
+    </application>
+</manifest>

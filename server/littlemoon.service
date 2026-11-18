@@ -1,0 +1,12 @@
+[Unit]
+Description=LittleMoon assistant server
+After=network-online.target
+
+[Service]
+WorkingDirectory=/opt/littlemoon
+EnvironmentFile=/opt/littlemoon/.env
+ExecStart=/usr/bin/node /opt/littlemoon/server.mjs
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
